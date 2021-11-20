@@ -1,69 +1,37 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Scanner;
 
-class User {
-    String client_id;
-    String sex;
-    Date fulldate;
-    int day;
-    int month;
-    int year;
-    int age;
-    String cnic;
-    String first;
-    String middle;
-    String last;
-    String phone;
-    String email;
-    String address_1;
-    String address_2;
-    String city;
-    String state;
-    int zipcode;
-    int district_id;
-
-    User(String[] metadata) throws Exception {
-                this.client_id = metadata[0];
-                this.sex = metadata[1];
-                this.fulldate = new SimpleDateFormat("dd/MM/yyyy").parse(metadata[2]);
-                this.day = Integer.parseInt(metadata[3]);
-                this.month =Integer.parseInt(metadata[4]);
-                this.year = Integer.parseInt(metadata[5]);
-                this.age = Integer.parseInt(metadata[6]);
-                this.cnic =metadata[7];
-                this.first =metadata[8];
-                this.middle = metadata[9];
-                this.last =metadata[10];
-                this.phone = metadata[11];
-                this.email = metadata[12];
-                this.address_1 = metadata[13];
-                this.address_2 = metadata[14];
-                this.city = metadata[15];
-                this.state = metadata[16];
-                this.zipcode = Integer.parseInt(metadata[17]);
-                this.district_id = Integer.parseInt(metadata[18]);
-    }
-}
+/* import User Type */
+import Structs.User;
+import Utils.Hashing;
 
 public class Users {
     public static void main(String[] args) throws Exception {
 
         try {
-            File file = new File("completedclient.csv");
+            File file = new File("./Data/completedclient.csv");
             Scanner sc = new Scanner(file);
-            ArrayList<User> users = new ArrayList<User>();
             
-            String[] labels = sc.nextLine().split(",");
-            System.out.println(labels[4]);
+            BufferedReader reader = new BufferedReader(new FileReader("./Data/completedclient.csv"));
+            int lines = 0;
+            while (reader.readLine() != null) lines++;
+            reader.close();
+
+           
+            Hashing<User> hashTable = new Hashing<User>(lines);
             
-            String[] data;
+            // String[] labels = sc.nextLine().split(",");
+            // System.out.println(labels[4]);
+            
+            String[] data = sc.nextLine().split(",");
             while(sc.hasNext()) {
                 data = sc.nextLine().split(",");
                 User user = new User(data);
+                hashTable.insert(user, data[0]);
             }
+            System.out.println(data[0]);
+            System.out.println("done" + hashTable.numofCollisions + " " + hashTable.numofOccupiedCells);
+            sc.close();
             
 
         } catch (FileNotFoundException e) {
