@@ -1,24 +1,27 @@
-package Utils;
+package User;
 
-import java.util.LinkedList;
+import Structs.User;
 
-public class Hashing <E extends Comparable <E>>{
-    LinkedList[] Table;
+public class HashingUser {
+
+    UserType[] Table;
+    int count = 0;
+    
     int N = 0;
     int arrLength = 0;
 
     public int numofCollisions = 0;
     public int numofOccupiedCells = 0;
-    int count = 0;
+    
 
-    public Hashing(long _N) {
+    public HashingUser(long _N) {
         N = (int)_N;
         count = N / 3;
         // table size should be a prime number and 1/3 extra.
         int size = (int)(N + (N / 3));
         int newSize = getPrime(size);
         arrLength = newSize;
-        Table = (LinkedList[]) new Comparable[size];
+        Table = new UserType[newSize]; 
     }
 
     private int getPrime(int n) {
@@ -50,8 +53,8 @@ public class Hashing <E extends Comparable <E>>{
         return hash % arrLength;
     }
 
-    public void insert(E obj, String keyVal) {
-        // keep maintain 1/3 empty cells
+    public void insert(User obj, String keyVal) {
+        UserType newUser = new UserType(obj);
         if ((Table.length - numofOccupiedCells) > count) {
             // call Hash(key) and save return hash-value
             int insertionIndex = Hash(keyVal);
@@ -59,49 +62,20 @@ public class Hashing <E extends Comparable <E>>{
                 if (no collision on hash-value) then place in table else place the collisions
                 in a linked list
              */
-            if (Table[insertionIndex] != null)
-            {
-                Table[insertionIndex] = new LinkedList();
-                Table[insertionIndex].
-                // while (n.next != null) {
-                //     n = n.next;
-                //     numofCollisions++;
-                // }
-                // n.next = your data
+            if (Table[insertionIndex] != null) {
+                Table[insertionIndex].next.insert(obj);
                 numofCollisions++;
-
             }
 
-            Table[insertionIndex] = obj;
+            Table[insertionIndex] = newUser;
             numofOccupiedCells++;
         }
     }
 
-    // public boolean search(int key) {
-    //     // search word in a hash table
-    //     // call Hash(key) and save return hash-value
-    //     int searchIndex = Hash(key);
-    //     // if (value match at hash-value index) return true
-    //     if (Table[searchIndex] == key) {
-    //         return true;
-    //     }
-    //     // else call rehash function until empty cell found or it reaches threshold
-    //     // limit of rehashes.
-    //     else {
-    //         int rehash = 0;
-    //         while (Table[searchIndex] != 0 && (rehash < Table.length)) {
-    //             if (Table[searchIndex] == key) {
-    //                 return true;
-    //             } else {
-    //                 rehash++;
-    //                 // searchIndex = LinearRehash(key, searchIndex);
-    //                 searchIndex = QuadraticRehash(key, searchIndex);
-    //             }
-
-    //         }
-    //     }
-    //     return false;
-    // }
+    public boolean search() {
+        //TODO
+        return true;
+    }
 
     public String toString() {
         String str = "";
@@ -110,5 +84,4 @@ public class Hashing <E extends Comparable <E>>{
         }
         return str;
     }
-
 }
