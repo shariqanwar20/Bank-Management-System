@@ -4,25 +4,25 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class User {
-    String client_id;
-    String sex;
-    Date fulldate;
-    int day;
-    int month;
-    int year;
-    int age;
-    String cnic;
-    String first;
-    String middle;
-    String last;
-    String phone;
-    String email;
-    String address_1;
-    String address_2;
-    String city;
-    String state;
-    int zipcode;
-    int district_id;
+    public String client_id;
+    public String sex;
+    public Date fulldate;
+    public int day;
+    public int month;
+    public int year;
+    public int age;
+    public String cnic;
+    public String first;
+    public String middle;
+    public String last;
+    public String phone;
+    public String email;
+    public String address_1;
+    public String address_2;
+    public String city;
+    public String state;
+    public int zipcode;
+    public int district_id;
 
     public User(String[] metadata) throws Exception {
         this.client_id = metadata[0];

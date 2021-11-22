@@ -1,9 +1,13 @@
-public class LinkedList <E extends Comparable <E>>
-{
-    Node<E> head;
-    public void insert(E data)
-    { //code here \
-        Node newNode = new Node(data);
+package User;
+
+import Structs.Node;
+import Structs.User;
+
+public class LinkedList {
+    Node<User> head;
+    public void insert(User data)
+    { 
+        Node<User> newNode = new Node<User>(data);
         if (head == null) {
             head = newNode;
         }
@@ -14,12 +18,13 @@ public class LinkedList <E extends Comparable <E>>
             head = newNode;
         }
     }
-    public Node find(E d) {
+
+    public Node<User> find(User d) {
         // find the node with value d
-        Node<E> temp = head;
+        Node<User> temp = head;
 
         while (temp != null) {
-            if (d.compareTo(temp.data) == 0) {
+            if (temp.data.client_id.equals(d.client_id)) {
                 return temp;
             } else {
                 temp = temp.next;
@@ -27,46 +32,41 @@ public class LinkedList <E extends Comparable <E>>
         }
         return null;
     }
-    public void remove(E d)
-    { // find the node with value d and remove that node
-        // first node to be removed
-        if (d.compareTo(head.data) == 0)
+    public void remove(User d)
+    { 
+        if (head.data.client_id.equals(d.client_id))
         {
-            head.next.prev = null;
+            head.next.previous = null;
             head = head.next;
         }
         else {
-            Node curr = head;
-            // Node prev = head;
-
-            // middle or last
+            Node<User> curr = head;
             while (curr != null) {
 
-                if (d == curr.data) {
-                    Node temp;
+                if (curr.data.client_id.equals(d.client_id)) {
+                    Node<User> temp;
                     //temp = curr.prev.next;
-                    // middle data
+
                     if (curr.next != null) {
-                        curr.prev.next = curr.next;
-                        curr.next.prev = curr.prev;
-                        //curr.next.prev = temp;
+                        temp = curr.previous;
+                        curr.previous= curr.next;
+                        curr.next.previous = temp;
                         break;
                     }
                     // last data
                     else
                     {
-                        curr.prev.next = null;
+                        curr.previous.next = null;
 
                     }
                 }
-                //prev = curr;
                 curr = curr.next;
 
             }
         }
     }
     public boolean isEmpty()
-    { //return true if linked list is empty
+    {
 
         if (head == null)
             return true;
@@ -74,20 +74,20 @@ public class LinkedList <E extends Comparable <E>>
             return false;
     }
 
-    public int length() { // return the number of nodes in the list length is zero for the empty list
+    public int length() {
         int length = 0;
 
-        Node temp = head;
+        Node<User> temp = head;
         while (temp != null) {
             length++;
             temp = temp.next;
         }
         return length;
     }
-    public String toString() // print the list as comma separated values
+    public String toString() 
     {
         String print = " ";
-        Node temp = head;
+        Node<User> temp = head;
 
         while (temp.next != null) {
             print = print + temp.data + ", ";
@@ -97,6 +97,5 @@ public class LinkedList <E extends Comparable <E>>
 
         return print;
     }
-
 
 }
