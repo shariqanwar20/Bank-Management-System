@@ -63,7 +63,7 @@ public class HashingUser {
                 in a linked list
              */
             if (Table[insertionIndex] != null) {
-                Table[insertionIndex].next.insert(obj);
+                Table[insertionIndex].insert(obj);
                 numofCollisions++;
             }
 
