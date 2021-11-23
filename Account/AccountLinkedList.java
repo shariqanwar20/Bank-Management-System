@@ -1,20 +1,14 @@
-package User;
+package Account;
 
 import Structs.Node;
-import Structs.User;
+import Structs.AccountType;
+import Structs.TransactionType;
 
-public class UserType {
-    User user;
-    LinkedList next;
-    Node<User> head;
-
-    UserType(User user) {
-        this.user = user;
-    }
-
-    public void insert(User data)
-    {
-        Node<User> newNode = new Node<User>(data);
+public class AccountLinkedList {
+    Node<AccountType> head;
+    public void insert(AccountType data)
+    { 
+        Node<AccountType> newNode = new Node<AccountType>(data);
         if (head == null) {
             head = newNode;
         }
@@ -26,12 +20,12 @@ public class UserType {
         }
     }
 
-    public Node<User> find(User d) {
+    public Node<AccountType> find(String id) {
         // find the node with value d
-        Node<User> temp = head;
+        Node<AccountType> temp = head;
 
         while (temp != null) {
-            if (temp.data.client_id.equals(d.client_id)) {
+            if (temp.data.id.equals(id)) {
                 return temp;
             } else {
                 temp = temp.next;
@@ -39,19 +33,19 @@ public class UserType {
         }
         return null;
     }
-    public void remove(User d)
-    {
-        if (head.data.client_id.equals(d.client_id))
+    public void remove(AccountType d)
+    { 
+        if (head.data.id.equals(d.id))
         {
             head.next.previous = null;
             head = head.next;
         }
         else {
-            Node<User> curr = head;
+            Node<AccountType> curr = head;
             while (curr != null) {
 
-                if (curr.data.client_id.equals(d.client_id)) {
-                    Node<User> temp;
+                if (curr.data.id.equals(d.id)) {
+                    Node<AccountType> temp;
                     //temp = curr.prev.next;
 
                     if (curr.next != null) {
@@ -84,17 +78,17 @@ public class UserType {
     public int length() {
         int length = 0;
 
-        Node<User> temp = head;
+        Node<AccountType> temp = head;
         while (temp != null) {
             length++;
             temp = temp.next;
         }
         return length;
     }
-    public String toString()
+    public String toString() 
     {
         String print = " ";
-        Node<User> temp = head;
+        Node<AccountType> temp = head;
 
         while (temp.next != null) {
             print = print + temp.data + ", ";
@@ -103,6 +97,10 @@ public class UserType {
         print += temp.data;
 
         return print;
+    }
+    public void displayRecord(Node<AccountType> obj)
+    {
+        System.out.println(obj.data.id + " " + obj.data.name + " " + obj.data.cnic + " " + obj.data.dateOfBirth +  " "  + obj.data.email + obj.data.city + " " + obj.data.address + " " + obj.data.phone + " " + obj.data.creationDate);
     }
 
 }

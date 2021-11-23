@@ -1,13 +1,13 @@
-package User;
+package Transaction;
 
 import Structs.Node;
-import Structs.User;
+import Structs.TransactionType;
 
-public class LinkedList {
-    Node<User> head;
-    public void insert(User data)
+public class TransactionLinkedList {
+    Node<TransactionType> head;
+    public void insert(TransactionType data)
     { 
-        Node<User> newNode = new Node<User>(data);
+        Node<TransactionType> newNode = new Node<TransactionType>(data);
         if (head == null) {
             head = newNode;
         }
@@ -19,12 +19,12 @@ public class LinkedList {
         }
     }
 
-    public Node<User> find(User d) {
+    public Node<TransactionType> find(String id) {
         // find the node with value d
-        Node<User> temp = head;
+        Node<TransactionType> temp = head;
 
         while (temp != null) {
-            if (temp.data.client_id.equals(d.client_id)) {
+            if (temp.data.id.equals(id)) {
                 return temp;
             } else {
                 temp = temp.next;
@@ -32,19 +32,19 @@ public class LinkedList {
         }
         return null;
     }
-    public void remove(User d)
+    public void remove(TransactionType d)
     { 
-        if (head.data.client_id.equals(d.client_id))
+        if (head.data.id.equals(d.id))
         {
             head.next.previous = null;
             head = head.next;
         }
         else {
-            Node<User> curr = head;
+            Node<TransactionType> curr = head;
             while (curr != null) {
 
-                if (curr.data.client_id.equals(d.client_id)) {
-                    Node<User> temp;
+                if (curr.data.id.equals(d.id)) {
+                    Node<TransactionType> temp;
                     //temp = curr.prev.next;
 
                     if (curr.next != null) {
@@ -77,7 +77,7 @@ public class LinkedList {
     public int length() {
         int length = 0;
 
-        Node<User> temp = head;
+        Node<TransactionType> temp = head;
         while (temp != null) {
             length++;
             temp = temp.next;
@@ -87,7 +87,7 @@ public class LinkedList {
     public String toString() 
     {
         String print = " ";
-        Node<User> temp = head;
+        Node<TransactionType> temp = head;
 
         while (temp.next != null) {
             print = print + temp.data + ", ";
@@ -97,5 +97,9 @@ public class LinkedList {
 
         return print;
     }
+    public void displayRecord(Node<TransactionType> obj)
+    {
+        System.out.println(obj.data.id + " " + obj.data.accountId + " " + obj.data.accountBalance + " " + obj.data.date + " " + obj.data.time + " " + obj.data.transactionAmount);
 
+    }
 }
