@@ -1,10 +1,10 @@
-package User;
+package Transaction;
 
-import Structs.User;
+import Structs.TransactionType;
 
-public class HashingUser {
+public class Transaction {
 
-    UserType[] Table;
+    TransactionLinkedList[] Table;
     int count = 0;
     
     int N = 0;
@@ -14,14 +14,14 @@ public class HashingUser {
     public int numofOccupiedCells = 0;
     
 
-    public HashingUser(long _N) {
+    public Transaction(long _N) {
         N = (int)_N;
         count = N / 3;
         // table size should be a prime number and 1/3 extra.
         int size = (int)(N + (N / 3));
         int newSize = getPrime(size);
         arrLength = newSize;
-        Table = new UserType[newSize]; 
+        Table = new TransactionLinkedList[newSize]; 
     }
 
     private int getPrime(int n) {
@@ -47,27 +47,27 @@ public class HashingUser {
         newKey.toLowerCase();
         for (int i=0, n=key.length(); i<n; i++)
         {
-            hash = (hash << 7) ^ newKey.charAt(i);
+            hash = (hash << 3) ^ newKey.charAt(i);
         }
-        System.out.println(hash % arrLength);
+        // System.out.println(hash % arrLength);
         return hash % arrLength;
     }
 
-    public void insert(User obj, String keyVal) {
-        UserType newUser = new UserType(obj);
+    public void insert(TransactionType obj, String keyVal) {
         if ((Table.length - numofOccupiedCells) > count) {
             // call Hash(key) and save return hash-value
             int insertionIndex = Hash(keyVal);
             /*
-                if (no collision on hash-value) then place in table else place the collisions
-                in a linked list
+             place the data in an already instatntiated linked list
              */
             if (Table[insertionIndex] != null) {
                 Table[insertionIndex].insert(obj);
                 numofCollisions++;
             }
 
-            Table[insertionIndex] = newUser;
+            /* first instantiate a linked list at this position then insert data */
+            Table[insertionIndex] = new TransactionLinkedList();
+            Table[insertionIndex].insert(obj);
             numofOccupiedCells++;
         }
     }
