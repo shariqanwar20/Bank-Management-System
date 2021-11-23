@@ -1,12 +1,14 @@
 package User;
 
 import Structs.Node;
+
 import Structs.User;
 
 public class UserType {
     User user;
     LinkedList next;
     Node<User> head;
+
 
     UserType(User user) {
         this.user = user;
@@ -104,5 +106,4 @@ public class UserType {
 
         return print;
     }
-
 }
