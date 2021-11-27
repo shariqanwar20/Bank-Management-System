@@ -1,14 +1,9 @@
 package Transaction;
-
-
-import Structs.AccountType;
-import Structs.Node;
-
 import Structs.TransactionType;
 
 public class Transaction {
 
-    TransactionLinkedList[] Table;
+    TransactionType[] Table;
     int count = 0;
     
     int N = 0;
@@ -25,7 +20,7 @@ public class Transaction {
         int size = (int)(N + (N / 3));
         int newSize = getPrime(size);
         arrLength = newSize;
-        Table = new TransactionLinkedList[newSize]; 
+        Table = new TransactionType[newSize]; 
     }
 
     private int getPrime(int n) {
@@ -57,35 +52,58 @@ public class Transaction {
         return hash % arrLength;
     }
 
+    public int Hash(String key, int _i) {
+        // compute hash value by taking mod on key value and return remainder
+        int hash = 0;
+        String newKey = key;
+        newKey.toLowerCase();
+        for (int i = 0, n = key.length(); i < n; i++) {
+            hash = (hash << 7) ^ newKey.charAt(i);
+        }
+        return (hash + _i) % arrLength;
+    }
+
     public void insert(TransactionType obj, String keyVal) {
+        int rehash = 1;
         if ((Table.length - numofOccupiedCells) > count) {
             // call Hash(key) and save return hash-value
             int insertionIndex = Hash(keyVal);
-            /*
-             place the data in an already instatntiated linked list
-             */
             if (Table[insertionIndex] != null) {
-                Table[insertionIndex].insert(obj);
-                numofCollisions++;
+                if (rehash < Table.length) {
+                    while (Table[insertionIndex] != null) {
+                        insertionIndex = Hash(keyVal, rehash);
+                        // also count number of collisions on each key insertion
+                        numofCollisions++;
+                        rehash++;
+                    }
+                    
+                } else {
+                    return;
+                }
             }
 
             /* first instantiate a linked list at this position then insert data */
-            Table[insertionIndex] = new TransactionLinkedList();
-            Table[insertionIndex].insert(obj);
+            Table[insertionIndex] = obj;
             numofOccupiedCells++;
         }
     }
 
-    public boolean search() {
-
+    public TransactionType search(String id) {
         int insertionIndex = Hash(id);
-        if (Table[insertionIndex] != null)
-        {
-            Table[insertionIndex].displayRecord(Table[insertionIndex].find(id));
-            return(Table[insertionIndex].find(id));
-        }
-        return null;
+        int rehash = 1;
+        
+        if(Table[insertionIndex] != null) {
+            while(Table[insertionIndex] != null && insertionIndex< Table.length && !Table[insertionIndex].id.equals(id)) {
+                insertionIndex = Hash(id, rehash);
+                rehash++;
+            }
 
+            if(Table[insertionIndex].id.equals(id)) {
+                return Table[insertionIndex];
+            }
+        }
+
+        return null;
 
     }
 

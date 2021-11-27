@@ -1,6 +1,8 @@
+package ComplainBox;
+
 public class ListQueue <T>
 {
-    ListQueue obj = new ListQueue();
+    ListQueue<T> obj = new ListQueue<T>();
     node<T> Front;
     node<T> Rear;
 

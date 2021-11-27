@@ -13,6 +13,7 @@ public class AccountType {
     public String address;
     public String city;
     public Date dateOfBirth;
+    public Boolean status;
 
     public AccountType(String[] metadata) throws Exception {
         this.id = metadata[0];
@@ -24,6 +25,7 @@ public class AccountType {
         this.address = metadata[6];
         this.city = metadata[7];
         this.dateOfBirth = new SimpleDateFormat("dd/MM/yyyy").parse(metadata[8]);
+        this.status = true;
     }
 
     public String toString() {
