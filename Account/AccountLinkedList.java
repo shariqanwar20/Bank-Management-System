@@ -3,6 +3,7 @@ package Account;
 import Structs.Node;
 import Structs.AccountType;
 
+
 public class AccountLinkedList {
     Node<AccountType> head;
     public void insert(AccountType data)
@@ -19,12 +20,17 @@ public class AccountLinkedList {
         }
     }
 
-    public Node<AccountType> find(AccountType d) {
+
+    public Node<AccountType> find(String id) {
+
+
         // find the node with value d
         Node<AccountType> temp = head;
 
         while (temp != null) {
-            if (temp.data.id.equals(d.id)) {
+
+            if (temp.data.id.equals(id)) {
+
                 return temp;
             } else {
                 temp = temp.next;
@@ -97,5 +103,13 @@ public class AccountLinkedList {
 
         return print;
     }
+
+
+    public void displayRecord(Node<AccountType> obj)
+    {
+        System.out.println(obj.data.id + " " + obj.data.name + " " + obj.data.cnic + " " + obj.data.dateOfBirth +  " "  + obj.data.email + obj.data.city + " " + obj.data.address + " " + obj.data.phone + " " + obj.data.creationDate);
+    }
+
+
 
 }
