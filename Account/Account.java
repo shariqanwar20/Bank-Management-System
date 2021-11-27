@@ -72,6 +72,7 @@ public class Account {
         }
     }
 
+
     public Node<AccountType> search(String id) {
         //TODO
         int insertionIndex = Hash(id);
@@ -81,6 +82,7 @@ public class Account {
             return(Table[insertionIndex].find(id));
         }
         return null;
+
     }
 
     public String toString() {

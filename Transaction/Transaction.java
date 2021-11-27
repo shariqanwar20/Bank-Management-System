@@ -1,7 +1,9 @@
 package Transaction;
 
+
 import Structs.AccountType;
 import Structs.Node;
+
 import Structs.TransactionType;
 
 public class Transaction {
@@ -83,6 +85,7 @@ public class Transaction {
             return(Table[insertionIndex].find(id));
         }
         return null;
+
     }
 
     public String toString() {
