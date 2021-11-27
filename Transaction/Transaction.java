@@ -1,5 +1,9 @@
 package Transaction;
 
+
+import Structs.AccountType;
+import Structs.Node;
+
 import Structs.TransactionType;
 
 public class Transaction {
@@ -72,9 +76,16 @@ public class Transaction {
         }
     }
 
-    public boolean search() {
+    public Node<TransactionType> search(String id) {
         //TODO
-        return true;
+        int insertionIndex = Hash(id);
+        if (Table[insertionIndex] != null)
+        {
+            Table[insertionIndex].displayRecord(Table[insertionIndex].find(id));
+            return(Table[insertionIndex].find(id));
+        }
+        return null;
+
     }
 
     public String toString() {

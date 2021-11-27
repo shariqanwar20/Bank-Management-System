@@ -1,6 +1,7 @@
 package Account;
 
 import Structs.AccountType;
+import Structs.Node;
 
 public class Account {
 
@@ -71,9 +72,17 @@ public class Account {
         }
     }
 
-    public boolean search() {
+
+    public Node<AccountType> search(String id) {
         //TODO
-        return true;
+        int insertionIndex = Hash(id);
+        if (Table[insertionIndex] != null)
+        {
+            Table[insertionIndex].displayRecord(Table[insertionIndex].find(id));
+            return(Table[insertionIndex].find(id));
+        }
+        return null;
+
     }
 
     public String toString() {
