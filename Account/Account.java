@@ -1,7 +1,6 @@
 package Account;
 
 import Structs.AccountType;
-import Structs.Node;
 
 public class Account {
 
@@ -71,6 +70,7 @@ public class Account {
             numofOccupiedCells++;
         }
     }
+
 
 
     public Node<AccountType> search(String id) {

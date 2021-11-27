@@ -20,12 +20,14 @@ public class TransactionLinkedList {
     }
 
 
+
     public Node<TransactionType> find(String id) {
 
         // find the node with value d
         Node<TransactionType> temp = head;
 
         while (temp != null) {
+
 
             if (temp.data.id.equals(id)) {
 
@@ -101,6 +103,7 @@ public class TransactionLinkedList {
 
         return print;
     }
+
 
     public void displayRecord(Node<TransactionType> obj)
     {

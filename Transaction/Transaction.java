@@ -76,8 +76,8 @@ public class Transaction {
         }
     }
 
-    public Node<TransactionType> search(String id) {
-        //TODO
+    public boolean search() {
+
         int insertionIndex = Hash(id);
         if (Table[insertionIndex] != null)
         {
@@ -85,6 +85,7 @@ public class Transaction {
             return(Table[insertionIndex].find(id));
         }
         return null;
+
 
     }
 
