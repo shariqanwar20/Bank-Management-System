@@ -19,12 +19,18 @@ public class TransactionLinkedList {
         }
     }
 
-    public Node<TransactionType> find(TransactionType d) {
+
+
+    public Node<TransactionType> find(String id) {
+
         // find the node with value d
         Node<TransactionType> temp = head;
 
         while (temp != null) {
-            if (temp.data.id.equals(d.id)) {
+
+
+            if (temp.data.id.equals(id)) {
+
                 return temp;
             } else {
                 temp = temp.next;
@@ -96,6 +102,13 @@ public class TransactionLinkedList {
         print += temp.data;
 
         return print;
+    }
+
+
+    public void displayRecord(Node<TransactionType> obj)
+    {
+        System.out.println(obj.data.id + " " + obj.data.accountId + " " + obj.data.accountBalance + " " + obj.data.date + " " + obj.data.time + " " + obj.data.transactionAmount);
+
     }
 
 }
