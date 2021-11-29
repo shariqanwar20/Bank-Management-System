@@ -3,7 +3,7 @@ package Utils;
 import Structs.Node;
 
 public class LinkedList<T extends Comparable<T>> {
-    Node<T> head;
+    public Node<T> head;
 
     public void insert(T data) {
         Node<T> newNode = new Node<T>(data);

@@ -39,6 +39,10 @@ public class Transaction {
         return true;
     }
 
+    public TransactionType getTransAtSpecificIndex(int index) {
+        return this.Table[index];
+    }
+
     public int Hash(String key) {
         // compute hash value by taking mod on key value and return remainder
         int hash = 0;
