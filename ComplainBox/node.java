@@ -1,9 +1,11 @@
-public class node<T>
+package ComplainBox;
+
+public class node
 {
     String Complain;
     String Date;
     int id;
-    node<T> next;
+    node next;
 
     public node (String Complain, String Date, int id)
     {

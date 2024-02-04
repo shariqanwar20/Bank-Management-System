@@ -1,12 +1,14 @@
-public class ListQueue <T>
+package ComplainBox;
+
+public class ListQueue
 {
     ListQueue obj = new ListQueue();
-    node<T> Front;
-    node<T> Rear;
+    node Front;
+    node Rear;
 
     public void Enqueue(String Complain, String Date, int ID)
     {
-        node <T> n = new node<T>(Complain, Date, ID);
+        node n = new node(Complain, Date, ID);
 
         if (Front == null && Rear == null)
         {

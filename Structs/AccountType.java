@@ -1,5 +1,6 @@
 package Structs;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -13,17 +14,24 @@ public class AccountType {
     public String address;
     public String city;
     public Date dateOfBirth;
+    public Boolean status;
 
-    public AccountType(String[] metadata) throws Exception {
-        this.id = metadata[0];
-        this.creationDate = new SimpleDateFormat("dd/MM/yyyy").parse(metadata[1]);
-        this.cnic = metadata[2];
-        this.name = metadata[3];
-        this.phone = metadata[4];
-        this.email = metadata[5];
-        this.address = metadata[6];
-        this.city = metadata[7];
-        this.dateOfBirth = new SimpleDateFormat("dd/MM/yyyy").parse(metadata[8]);
+    public AccountType(String[] metadata) {
+        try {
+            this.id = metadata[0];
+            this.creationDate = new SimpleDateFormat("dd/MM/yyyy").parse(metadata[1]);
+            this.cnic = metadata[2];
+            this.name = metadata[3];
+            this.phone = metadata[4];
+            this.email = metadata[5];
+            this.address = metadata[6];
+            this.city = metadata[7];
+            this.dateOfBirth = new SimpleDateFormat("dd/MM/yyyy").parse(metadata[8]);
+            this.status = true;
+
+        } catch (ParseException e) {
+            System.out.println(e);
+        }
     }
 
     public String toString() {
